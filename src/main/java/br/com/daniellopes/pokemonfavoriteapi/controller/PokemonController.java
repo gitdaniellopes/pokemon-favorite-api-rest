@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/pokemon")
+@RequestMapping("/api")
 @Api(value = "API REST Pokemon")
 @CrossOrigin(origins = "*")
 public class PokemonController {
@@ -29,14 +29,14 @@ public class PokemonController {
         this.repository = repository;
     }
 
-    @GetMapping
+    @GetMapping("/pokemons")
     @ApiOperation(value = "Retorna uma lista de pokemons")
     public List<PokemonDto> list() {
         List<Pokemon> pokemons = repository.findAll();
         return PokemonDto.convert(pokemons);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("pokemon/{id}")
     @ApiOperation(value = "Retorna um pokemon unico por id")
     public ResponseEntity<DetailPokemonDto> detail(@PathVariable Long id) {
         Optional<Pokemon> pokemon = repository.findById(id);
@@ -45,7 +45,7 @@ public class PokemonController {
                 -> ResponseEntity.notFound().build());
     }
 
-    @PostMapping
+    @PostMapping("/pokemon")
     @Transactional
     @ApiOperation(value = "Registra um pokemon")
     public ResponseEntity<PokemonDto> save(@RequestBody @Valid
