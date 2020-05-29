@@ -30,7 +30,7 @@ public class PokemonController {
     }
 
     @GetMapping
-    @ApiOperation(value = "Retorna uma lista de pokemns")
+    @ApiOperation(value = "Retorna uma lista de pokemons")
     public List<PokemonDto> list() {
         List<Pokemon> pokemons = repository.findAll();
         return PokemonDto.convert(pokemons);
