@@ -56,16 +56,4 @@ public class PokemonController {
         return ResponseEntity.created(uri).body(new PokemonDto(pokemon));
     }
 
-
-    @DeleteMapping("/{id}")
-    @Transactional
-    public ResponseEntity<?> remove(@PathVariable Long id) {
-        Optional<Pokemon> optional = repository.findById(id);
-        if (optional.isPresent()) {
-            repository.deleteById(id);
-            return ResponseEntity.ok().build();
-        }
-
-        return ResponseEntity.notFound().build();
-    }
 }
