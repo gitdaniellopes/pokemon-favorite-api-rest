@@ -30,14 +30,14 @@ public class PokemonController {
     }
 
     @GetMapping
-    @ApiOperation(value = "Retorna uma lista de pokemns favoritos")
+    @ApiOperation(value = "Retorna uma lista de pokemns")
     public List<PokemonDto> list() {
         List<Pokemon> pokemons = repository.findAll();
         return PokemonDto.convert(pokemons);
     }
 
     @GetMapping("/{id}")
-    @ApiOperation(value = "Retorna um pokemon unico")
+    @ApiOperation(value = "Retorna um pokemon unico por id")
     public ResponseEntity<DetailPokemonDto> detail(@PathVariable Long id) {
         Optional<Pokemon> pokemon = repository.findById(id);
         return pokemon.map(value ->
@@ -47,6 +47,7 @@ public class PokemonController {
 
     @PostMapping
     @Transactional
+    @ApiOperation(value = "Registra um pokemon")
     public ResponseEntity<PokemonDto> save(@RequestBody @Valid
                                                    PokemonForm form, UriComponentsBuilder uriBuilder) {
         Pokemon pokemon = form.convert();
