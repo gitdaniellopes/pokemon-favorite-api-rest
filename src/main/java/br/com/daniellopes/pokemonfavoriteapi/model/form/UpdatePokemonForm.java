@@ -2,32 +2,32 @@ package br.com.daniellopes.pokemonfavoriteapi.model.form;
 
 import br.com.daniellopes.pokemonfavoriteapi.model.Pokemon;
 import br.com.daniellopes.pokemonfavoriteapi.model.Results;
+import br.com.daniellopes.pokemonfavoriteapi.repository.PokemonRepository;
 import br.com.daniellopes.pokemonfavoriteapi.repository.ResultsRepository;
-import org.hibernate.validator.constraints.Length;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+public class UpdatePokemonForm {
 
-public class PokemonForm {
-
-    @NotNull
-    @NotEmpty
-    @Length(min = 2, max = 60)
     private String name;
-    @NotNull
-    @NotEmpty
-    @Length(min = 2, max = 250)
     private String description;
-    @NotNull
-    @NotEmpty
-    @Length(min = 3, max = 60)
     private String type;
     private String numberSerial;
-    @NotNull
-    @NotEmpty
     private String curlUrl;
-
     private String nameResults;
+
+
+    public Pokemon updateUp(Long id, PokemonRepository pokemonRepository,
+                            ResultsRepository resultsRepository) {
+        Pokemon pokemon = pokemonRepository.getOne(id);
+        Results byName = resultsRepository.findByName(nameResults);
+        pokemon.setName(this.name);
+        pokemon.setDescription(this.description);
+        pokemon.setType(this.type);
+        pokemon.setNumberSerial(this.numberSerial);
+        pokemon.setCurlUrl(this.curlUrl);
+        pokemon.setResults(byName);
+
+        return pokemon;
+    }
 
     public String getName() {
         return name;
@@ -76,11 +76,4 @@ public class PokemonForm {
     public void setNameResults(String nameResults) {
         this.nameResults = nameResults;
     }
-
-    public Pokemon convert(ResultsRepository resultsRepository) {
-        Results results = resultsRepository.findByName(nameResults);
-        return new Pokemon(name, description, type, numberSerial, curlUrl, results);
-
-    }
-
 }

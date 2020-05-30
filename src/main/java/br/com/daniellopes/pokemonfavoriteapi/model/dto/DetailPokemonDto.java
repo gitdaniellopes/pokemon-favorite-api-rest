@@ -8,16 +8,19 @@ public class DetailPokemonDto {
     private final String name;
     private final String description;
     private final String type;
-    private final int number;
-    private final String curl_url;
+    private final String numberSerial;
+    private final String curlUrl;
+    private final String nameResults;
+
 
     public DetailPokemonDto(Pokemon pokemon) {
         this.id = pokemon.getId();
         this.name = pokemon.getName();
         this.description = pokemon.getDescription();
         this.type = pokemon.getType();
-        this.number = pokemon.getNumber();
-        this.curl_url = pokemon.getCurl_url();
+        this.numberSerial = pokemon.getNumberSerial();
+        this.curlUrl = pokemon.getCurlUrl();
+        this.nameResults = pokemon.getResults().getName();
     }
 
     public Long getId() {
@@ -36,11 +39,15 @@ public class DetailPokemonDto {
         return type;
     }
 
-    public int getNumber() {
-        return number;
+    public String getNumberSerial() {
+        return numberSerial;
     }
 
-    public String getCurl_url() {
-        return curl_url;
+    public String getCurlUrl() {
+        return curlUrl;
+    }
+
+    public String getNameResults() {
+        return nameResults;
     }
 }

@@ -9,12 +9,12 @@ public class PokemonDto {
 
     private final Long id;
     private final String name;
-    private final String curl_url;
+    private final String curlUrl;
 
     public PokemonDto(Pokemon pokemon) {
         this.id = pokemon.getId();
         this.name = pokemon.getName();
-        this.curl_url = pokemon.getCurl_url();
+        this.curlUrl = pokemon.getCurlUrl();
     }
 
     public Long getId() {
@@ -25,8 +25,8 @@ public class PokemonDto {
         return name;
     }
 
-    public String getCurl_url() {
-        return curl_url;
+    public String getCurlUrl() {
+        return curlUrl;
     }
 
     public static List<PokemonDto> convert(List<Pokemon> pokemons) {

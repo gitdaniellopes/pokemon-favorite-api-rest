@@ -13,18 +13,26 @@ public class Pokemon {
     private String description;
     private String type;
 
-    private int number;
-    private String curl_url;
+    @Column(name = "serial_number")
+    private String numberSerial;
+
+    @Column(name = "curl_url")
+    private String curlUrl;
+
+    @ManyToOne
+    private Results results;
 
     public Pokemon() {
     }
 
-    public Pokemon(String name, String description, String type, int number, String curl_url) {
+    public Pokemon(String name, String description, String type, String numberSerial,
+                   String curlUrl, Results results) {
         this.name = name;
         this.description = description;
         this.type = type;
-        this.number = number;
-        this.curl_url = curl_url;
+        this.numberSerial = numberSerial;
+        this.curlUrl = curlUrl;
+        this.results = results;
     }
 
     public Long getId() {
@@ -59,20 +67,28 @@ public class Pokemon {
         this.type = type;
     }
 
-    public int getNumber() {
-        return number;
+    public String getNumberSerial() {
+        return numberSerial;
     }
 
-    public void setNumber(int number) {
-        this.number = number;
+    public void setNumberSerial(String numberSerial) {
+        this.numberSerial = numberSerial;
     }
 
-    public String getCurl_url() {
-        return curl_url;
+    public String getCurlUrl() {
+        return curlUrl;
     }
 
-    public void setCurl_url(String curl_url) {
-        this.curl_url = curl_url;
+    public void setCurlUrl(String curlUrl) {
+        this.curlUrl = curlUrl;
+    }
+
+    public Results getResults() {
+        return results;
+    }
+
+    public void setResults(Results results) {
+        this.results = results;
     }
 
     @Override
