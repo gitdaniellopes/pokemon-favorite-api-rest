@@ -18,6 +18,10 @@ public class Results {
     public Results() {
     }
 
+    public Results(String name) {
+        this.name = name;
+    }
+
     public Long getId() {
         return id;
     }
